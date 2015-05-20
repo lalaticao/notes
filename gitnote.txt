@@ -1,0 +1,99 @@
+----------------------------------------------------------------------------------------------------------------
+                                             git clone <remotegit>                
+                                             init                    git remote add origin <remotegit>
+LOCAL                                                                REMOTE
+Working Drectory  =add=>X  Stage  =commit=>  Repository  =push=>M Repository
+                  =rm==>X    ||              ||         M<=pull==
+                 X<=checkout -- <file>========         
+                  <=reset==X
+----------------------------------------------------------------------------------------------------------------
+本地构建版本库
+$git init #初始化本地版本库
+$git clone <remote git> #克隆一个远程版本库到本地
+
+关联远程版本库
+$git remote add origin <remote git> #origin处可以是其他名字,但origin最常用
+
+工作目录提交到暂存区
+$git add <file> #可以同时add多个文件,空格隔开
+$git rm <file> #删除文件
+
+暂存区提交到本地版本库
+$git commit -m "message"
+
+本地版本库提交到远程版本库
+$git push -u origin <branch> #同时将远程和本地的<branch>关联起来
+$git push origin <branch>
+
+设置本地和远程branch的关联
+$git branch --set-upstream <branch> origin/<branch>
+
+从远程版本库抓取分支
+$git pull
+
+撤销提交unstage
+$git reset <commit id> <file> #使<file>回到<commit id>后的状态,同时撤销暂存区中的该文件
+
+丢弃工作区的修改
+$git checkout -- <file> #使工作区的文件替换为暂存区里的文件,若没有则替换为版本库里的文件
+
+版本回退
+$git reset --hard <commit id> #使工作区回到<commit id>后的状态,同时暂存区清空
+
+查看暂存区状态
+$git status
+
+查看修改前后的文件区别
+$git diff <file>
+
+查看提交记录
+$git log
+
+查看命令记录
+$git reflog
+----------------------------------------------------------------------------------------------------------------
+         |--------reset-------|
+         V             HEAD^ HEAD
+---*-----*-----*---*-*--*-----*  master
+    \-----*---/   / /
+     \--*--\---*-/ /
+            \-----/  other branch
+----------------------------------------------------------------------------------------------------------------
+创建分支
+$git branch <branch>
+
+切换分支
+$git checkout <branch>
+$git checkout -b <branch> #创建并切换
+
+合并分支
+$git merge <branch> #将<branch>和当前分支合并
+
+删除分支
+$git branch -d <branch>
+
+查看分支
+$git branch
+
+创建标签
+$git tag <tag> (<commit id>) #在当前分支上设置标签,不指定<commit id>时默认为最新的的commit
+$git tag -a <tag> -m <message> (<commit id>) #同时设置说明文字
+
+删除标签
+$git tag -d <tag>
+
+标签推送到远程版本库
+$git push origin <tag>
+$git push origin --tags #全部推送过去
+
+删除远程标签
+$git push origin :refs/tags/<tag>
+
+查看标签
+$git tag
+
+查看标签详情
+$git show <tag>
+
+创建ssh公钥私钥
+ssh-keygen -t rsa -C "youremail@example.com"
